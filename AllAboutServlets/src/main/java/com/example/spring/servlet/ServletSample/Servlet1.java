@@ -25,9 +25,10 @@ public class Servlet1 implements Servlet {
 
 		final HttpServletResponse response = (HttpServletResponse) res;
 		res.getWriter().write("Hello I am a servlet 1 \n" + //
-				"Custom init param value is: " + req.getServletContext().getInitParameter("cutomParam") + "\n"+ //
-				"Value for response header correlation_id added in filter is: "
-				+ response.getHeader("correlation_id"));
+				"Custom init param (local) value is: " + req.getServletContext().getInitParameter("InitParam1") + "\n" + //
+				"Custom init param value is: " + req.getServletContext().getInitParameter("initParam") + "\n" + //
+				"Custom context param value is: " + req.getServletContext().getAttribute("contextParam") + "\n" + //
+				"Value for response header correlation_id added in filter is: " + response.getHeader("correlation_id"));
 	}
 
 	@Override

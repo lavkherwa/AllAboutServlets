@@ -1,5 +1,8 @@
 package com.example.spring.servlet.configurations;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -17,10 +20,17 @@ public class ServletConfig {
 
 	/* Programmatically configuring Servlet is as below */
 	@Bean
-	public ServletRegistrationBean<Servlet1> exampleServletBean() {
-		ServletRegistrationBean<Servlet1> servlet1 = new ServletRegistrationBean<Servlet1>(new Servlet1(), "/servlet1");
-		servlet1.setLoadOnStartup(1);
-		return servlet1;
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ServletRegistrationBean exampleServletBean() {
+		ServletRegistrationBean reg = new ServletRegistrationBean(new Servlet1(), "/servlet1");
+
+		Map<String, String> initParams = new HashMap<>();
+		initParams.put("InitParam1", "initParam1");
+		initParams.put("InitParam2", "initParam2");
+
+		reg.setInitParameters(initParams); // not working?
+		reg.setLoadOnStartup(1);
+		return reg;
 	}
 
 	/*
@@ -37,8 +47,9 @@ public class ServletConfig {
 
 			@Override
 			public void onStartup(ServletContext servletContext) throws ServletException {
-				servletContext.setInitParameter("cutomParam", "Injected custom param");
 
+				servletContext.setInitParameter("initParam", "Injected init parameter");
+				servletContext.setAttribute("contextParam", "Injected context parameter"); // global
 				/* Do something like register jobs etc.. */
 				doSomething();
 
