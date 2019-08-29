@@ -1,4 +1,4 @@
 # AllAboutServlets
 
 
-Example for some of the operations we can do with spring boot in servlets
+Useful configuration example when dealing with servlets in spring boot ;)
