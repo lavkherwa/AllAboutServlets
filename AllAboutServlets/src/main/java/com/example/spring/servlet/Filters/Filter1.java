@@ -15,10 +15,16 @@ public class Filter1 implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+
 		final HttpServletResponse resp = (HttpServletResponse) response;
+
 		resp.addHeader("correlation_id", UUID.randomUUID().toString());
 
+		System.out.println("before filter");
+
 		chain.doFilter(request, response);
+
+		System.out.println("after filter");
 
 	}
 

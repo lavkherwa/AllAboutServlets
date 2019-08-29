@@ -67,6 +67,7 @@ public class ServletConfig {
 
 		final FilterRegistrationBean<Filter1> filter1 = new FilterRegistrationBean<Filter1>(new Filter1());
 		filter1.addUrlPatterns("/*");
+		filter1.setOrder(1);
 		return filter1;
 
 	}
